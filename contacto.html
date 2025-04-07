@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Universidad Xcien</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #3B82F6;
+            --primary-dark: #1D4ED8;
+            --secondary-color: #0F172A;
+            --accent-color: #22D3EE;
+            --background-color: #F8FAFC;
+            --text-color: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --success-color: #10B981;
+            --error-color: #EF4444;
+            --warning-color: #F59E0B;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-button {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: white;
+            overflow: hidden;
+            transition: height 0.3s ease;
+            box-shadow: var(--shadow);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .mobile-menu-links a {
+            padding: 15px 0;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-menu-links a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 20px 20px;
+        }
+
+        /* Header */
+        .header {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, #2563EB, #1E40AF);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        /* Animated shapes */
+        .header-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -50px;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -50px;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            left: 70%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(20px, 20px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .breadcrumbs a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs-separator {
+            margin: 0 5px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .contact-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .contact-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+        }
+
+        .contact-info {
+            padding: 30px;
+        }
+
+        .contact-info-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-info-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-text strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            padding: 30px;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .form-submit:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Form validation and feedback */
+        .form-input.error {
+            border-color: var(--error-color);
+        }
+
+        .form-error {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-error.active {
+            display: block;
+        }
+
+        .form-success {
+            display: none;
+            padding: 15px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success-color);
+            border-radius: 8px;
+            color: var(--success-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-success.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Map */
+        .map-section {
+            padding: 0 0 80px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .accordion-header {
+            padding: 20px;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background-color: var(--background-color);
+        }
+
+        .accordion-icon {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-body {
+            padding: 0 20px 20px;
+            color: var(--text-muted);
+        }
+
+        /* Campus Tour Section */
+        .campus-tour {
+            padding: 80px 0;
+            background-color: var(--background-color);
+            text-align: center;
+        }
+
+        .campus-tour-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .campus-tour-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .campus-tour-description {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .campus-tour-video {
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .campus-tour-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .tour-schedule {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .tour-schedule:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2563EB, #1E40AF);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: white;
+            color: var(--primary-dark);
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-social-icon:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 12px;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-link a:hover {
+            color: white;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-icon {
+            color: var(--primary-light);
+        }
+
+        .footer-contact-text {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-newsletter {
+            margin-top: 20px;
+        }
+
+        .footer-newsletter-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .newsletter-button {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-button:hover {
+            background-color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        .form-submit.loading .spinner {
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .navbar-links {
+                display: none;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .header-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .header-title {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .contact-info, .contact-form {
+                padding: 20px;
+            }
+
+            .contact-info-title, .form-title {
+                font-size: 1.3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="javascript:void(0);" onclick="navegarA('inicio')" class="navbar-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Wispi Universidad</span>
+            </a>
+            <div class="navbar-links">
+                <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+                <a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a>
+                <a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a>
+            </div>
+            <div class="navbar-cta">
+                <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="btn btn-secondary">Iniciar Sesión</a>
+                <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="btn btn-primary">Inscríbete</a>
+            </div>
+            <div class="mobile-menu-button" id="mobileMenuButton">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+            <a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a>
+            <a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a>
+            <a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a>
+            <a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a>
+        </div>
+        <div class="mobile-menu-cta">
+            <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="btn btn-secondary">Iniciar Sesión</a>
+            <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="btn btn-primary">Inscríbete</a>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <!-- Formas animadas de fondo -->
+        <div class="header-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        
+        <div class="container header-content">
+            <div class="breadcrumbs">
+                <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+                <span class="breadcrumbs-separator">/</span>
+                <span>Contacto</span>
+            </div>
+            <h1 class="header-title">Contáctanos</h1>
+            <p class="header-subtitle">Estamos aquí para ayudarte. Ponte en contacto con nuestro equipo para resolver tus dudas sobre nuestros cursos, certificaciones o cualquier otra consulta.</p>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Comunícate con Nosotros</h2>
+            
+            <div class="contact-wrapper">
+                <!-- Información de Contacto -->
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <h3 class="contact-info-title">Información de Contacto</h3>
+                        
+                        <ul class="contact-list">
+                            <li class="contact-item">
+                                <i class="fas fa-clock contact-icon"></i>
+                                <div class="contact-text">
+                                    <strong>Horario de Atención:</strong>
+                                    Lunes a Viernes, 9:00 AM - 7:00 PM
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario de Contacto -->
+                <div class="contact-card">
+                    <div class="contact-form">
+                        <h3 class="form-title">Envíanos un Mensaje</h3>
+                        
+                        <div class="form-success" id="formSuccess">
+                            <i class="fas fa-check-circle"></i> ¡Gracias por contactarnos! Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo lo antes posible.
+                        </div>
+                        
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nombre Completo</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Tu nombre" required>
+                                <div class="form-error" id="nameError">Por favor ingresa tu nombre completo</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="correo@ejemplo.com" required>
+                                <div class="form-error" id="emailError">Por favor ingresa un correo electrónico válido</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Asunto</label>
+                                <input type="text" id="subject" name="subject" class="form-input" placeholder="Asunto del mensaje" required>
+                                <div class="form-error" id="subjectError">Por favor ingresa el asunto de tu mensaje</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Mensaje</label>
+                                <textarea id="message" name="message" class="form-input form-textarea" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                                <div class="form-error" id="messageError">Por favor escribe tu mensaje</div>
+                            </div>
+                            
+                            <button type="submit" class="form-submit" id="submitButton">
+                                Enviar Mensaje
+                                <div class="spinner"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3595.5696639328644!2d-100.31099428497969!3d25.67229898367957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662be2fb4d7363b%3A0xe16b94131bcf4db0!2sMart%C3%ADn%20de%20Zavala%20840%2C%20Centro%2C%2064000%20Monterrey%2C%20N.L.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1618338501234!5m2!1ses-419!2smx" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Tour Section -->
+    <section class="campus-tour">
+        <div class="container">
+            <div class="campus-tour-content">
+                <h2 class="campus-tour-title">Conoce Nuestras Instalaciones</h2>
+                <p class="campus-tour-description">Te invitamos a conocer nuestro campus moderno y completamente equipado con la última tecnología educativa. Agenda una visita guiada y descubre por qué somos la opción ideal para tu formación profesional.</p>
+                
+                <div class="campus-tour-video">
+                    <!-- Placeholder para un video de YouTube o similar -->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Tour virtual Campus Universidad Xcien" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                
+                <a href="#" class="tour-schedule">Agenda una Visita</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            
+            <div class="faq-container">
+                <!-- Pregunta 1 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        ¿Cómo puedo inscribirme en un curso?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Para inscribirte en cualquiera de nuestros cursos, simplemente crea una cuenta en nuestra plataforma, navega a la sección de capacitaciones y selecciona el curso que te interese. Luego, sigue las instrucciones para completar tu inscripción y realizar el pago correspondiente.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 2 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        ¿Cómo obtengo mi certificado al finalizar un curso?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Una vez que hayas completado todos los módulos del curso y aprobado las evaluaciones correspondientes, tu certificado estará disponible automáticamente en tu perfil en formato digital. También puedes solicitar una versión impresa con costo adicional.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 3 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        ¿Ofrecen descuentos para empresas?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Sí, contamos con planes especiales para empresas que desean capacitar a varios empleados. Ofrecemos precios preferenciales según el número de participantes y la cantidad de cursos seleccionados. Para más información, contacta a nuestro equipo de atención a empresas.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 4 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        ¿Puedo acceder a los cursos desde cualquier dispositivo?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Sí, nuestra plataforma es completamente responsive y puedes acceder a ella desde cualquier dispositivo con conexión a internet, ya sea una computadora, tablet o smartphone. Los contenidos se adaptan automáticamente para ofrecerte la mejor experiencia de aprendizaje.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 5 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        ¿Por cuánto tiempo tengo acceso a los cursos?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Una vez adquirido un curso, tendrás acceso a su contenido durante 12 meses. Esto te permitirá avanzar a tu propio ritmo y repasar el material cuando lo necesites. Para algunos programas especiales, el período de acceso puede variar.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">¿Listo para comenzar tu crecimiento profesional?</h2>
+            <p class="cta-subtitle">Inscríbete hoy mismo y da el primer paso hacia el desarrollo de nuevas habilidades y conocimientos que impulsarán tu carrera.</p>
+            <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="cta-btn">Inscríbete Ahora</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Columna 1: Logo e info -->
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Xcien</span>
+                    </div>
+                    <p class="footer-description">Transformamos el aprendizaje corporativo con una plataforma innovadora que combina tecnología ágil, metodologías prácticas y un sistema de certificaciones escalables.</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Columna 2: Enlaces rápidos -->
+                <div>
+                    <h3 class="footer-heading">Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 3: Módulos -->
+                <div>
+                    <h3 class="footer-heading">Módulos</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo1')">Fundamentos de Internet</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo2')">Direccionamiento IP</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo3')">Redes Legacy</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo4')">Firewalls y Ciberseguridad</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo5')">Cloud Computing</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo6')">Virtualización</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 4: Contacto -->
+                <div>
+                    <h3 class="footer-heading">Contacto</h3>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                        <div class="footer-contact-text">Martín de Zavala # 840, Col. Centro, CP 64000, Monterrey, N.L. México</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt footer-contact-icon"></i>
+                        <div class="footer-contact-text">800-288-0092</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope footer-contact-icon"></i>
+                        <div class="footer-contact-text">contacto@xcien.com</div>
+                    </div>
+                    
+                    <div class="footer-newsletter">
+                        <p class="footer-newsletter-text">Suscríbete a nuestro boletín</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Tu correo electrónico">
+                            <button type="submit" class="newsletter-button"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Universidad Xcien. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                
+                const menuIcon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+            
+            // Acordeón para las FAQs
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    
+                    const content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+            
+            // Validación del formulario de contacto
+            const contactForm = document.getElementById('contactForm');
+            const formSuccess = document.getElementById('formSuccess');
+            const submitButton = document.getElementById('submitButton');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Resetear errores
+                    const errorElements = document.querySelectorAll('.form-error');
+                    errorElements.forEach(error => error.classList.remove('active'));
+                    
+                    const inputElements = document.querySelectorAll('.form-input');
+                    inputElements.forEach(input => input.classList.remove('error'));
+                    
+                    // Obtener los valores del formulario
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const subject = document.getElementById('subject').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    
+                    // Validación básica
+                    let isValid = true;
+                    
+                    if (!name) {
+                        document.getElementById('nameError').classList.add('active');
+                        document.getElementById('name').classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    if (!email || !isValidEmail(email)) {
+                        document.getElementById('emailError').classList.add('active');
+                        document.getElementById('email').classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    if (!subject) {
+                        document.getElementById('subjectError').classList.add('active');
+                        document.getElementById('subject').classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    if (!message) {
+                        document.getElementById('messageError').classList.add('active');
+                        document.getElementById('message').classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    if (isValid) {
+                        // Mostrar spinner
+                        submitButton.classList.add('loading');
+                        submitButton.disabled = true;
+                        
+                        // Simular envío (reemplazar con la lógica de envío real)
+                        setTimeout(function() {
+                            // Ocultar spinner
+                            submitButton.classList.remove('loading');
+                            submitButton.disabled = false;
+                            
+                            // Mostrar mensaje de éxito
+                            formSuccess.classList.add('active');
+                            
+                            // Resetear formulario
+                            contactForm.reset();
+                            
+                            // Ocultar mensaje después de un tiempo
+                            setTimeout(function() {
+                                formSuccess.classList.remove('active');
+                            }, 5000);
+                        }, 1500);
+                    }
+                });
+            }
+            
+            // Validar formato de email
+            function isValidEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            }
+        });
+
+        // Función para manejar la navegación entre páginas
+        function navegarA(pagina) {
+            // Verificar si estamos en la raíz o en una subcarpeta
+            const estaEnSubcarpeta = window.location.pathname.includes('/pages/');
+            
+            // Construir la ruta adecuada
+            let ruta = '';
+            
+            if (pagina === 'inicio') {
+                ruta = estaEnSubcarpeta ? '../Indexanimado.html' : 'Indexanimado.html';
+            } else if (pagina === 'capacitaciones') {
+                ruta = estaEnSubcarpeta ? 'capacitaciones.html' : 'pages/capacitaciones.html';
+            } else if (pagina === 'nosotros') {
+                ruta = estaEnSubcarpeta ? 'nosotros.html' : 'pages/nosotros.html';
+            } else if (pagina === 'certificaciones') {
+                ruta = estaEnSubcarpeta ? 'certificaciones.html' : 'pages/certificaciones.html';
+            } else if (pagina === 'contacto') {
+                ruta = estaEnSubcarpeta ? 'contacto.html' : 'pages/contacto.html';
+            } else if (pagina === 'iniciarsesion') {
+                ruta = estaEnSubcarpeta ? 'iniciarsesion.html' : 'pages/iniciarsesion.html';
+            } else if (pagina === 'inscribete') {
+                ruta = estaEnSubcarpeta ? 'inscribete.html' : 'pages/inscribete.html';
+            } else if (pagina === 'modulo1') {
+                ruta = estaEnSubcarpeta ? 'modulo1.html' : 'pages/modulo1.html';
+            } else if (pagina === 'modulo2') {
+                ruta = estaEnSubcarpeta ? 'modulo2.html' : 'pages/modulo2.html';
+            } else if (pagina === 'modulo3') {
+                ruta = estaEnSubcarpeta ? 'modulo3.html' : 'pages/modulo3.html';
+            } else if (pagina === 'modulo4') {
+                ruta = estaEnSubcarpeta ? 'modulo4.html' : 'pages/modulo4.html';
+            } else if (pagina === 'modulo5') {
+                ruta = estaEnSubcarpeta ? 'modulo5.html' : 'pages/modulo5.html';
+            } else if (pagina === 'modulo6') {
+                ruta = estaEnSubcarpeta ? 'modulo6.html' : 'pages/modulo6.html';
+            }
+            
+            // Navegar a la ruta
+            window.location.href = ruta;
+        }
+    </script>
+</body>
+</html>

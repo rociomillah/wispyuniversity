@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | Universidad Xcien</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #3B82F6;
+            --primary-dark: #1D4ED8;
+            --secondary-color: #0F172A;
+            --accent-color: #22D3EE;
+            --background-color: #F8FAFC;
+            --text-color: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation - CORREGIDO para que coincida con el resto del sitio */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        /* CORREGIDO: Estilo del logo para que coincida con el resto del sitio */
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .navbar-logo i {
+            font-size: 1.5rem;
+        }
+
+        .navbar-logo span {
+            font-size: 1.5rem;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-links a.active {
+            color: var(--primary-color);
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover::after,
+        .navbar-links a.active::after {
+            width: 100%;
+        }
+
+        .navbar-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-button {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: white;
+            overflow: hidden;
+            transition: height 0.3s ease;
+            box-shadow: var(--shadow);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .mobile-menu-links a {
+            padding: 15px 0;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-menu-links a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 20px 20px;
+        }
+
+        /* Header */
+        .header {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .header-subtitle {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .header-title .text-accent {
+            color: var(--primary-color);
+        }
+
+        .header-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Animated elements */
+        .header-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.15);
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: -50px;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            left: -50px;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            right: 20%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(20px, 20px) rotate(10deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .about-text .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-img-bg {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 12px;
+            z-index: 0;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .mission-card, .vision-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            color: var(--text-muted);
+        }
+
+        /* History Timeline */
+        .history-section {
+            padding: 100px 0;
+            position: relative;
+            background-color: white;
+        }
+
+        .history-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 4px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .timeline-text {
+            color: var(--text-muted);
+        }
+
+        /* Stats Section - CORREGIDO para mejor visibilidad */
+        .stats-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(29, 78, 216, 0.95)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            color: white;
+            position: relative;
+        }
+
+        .stats-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 60px;
+            color: white;
+        }
+
+        .stats-title .text-accent {
+            color: #22D3EE; /* Color más claro para la X */
+            font-weight: 800;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: white; /* CORREGIDO: Mejorado contraste */
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 100px 0;
+        }
+
+        .team-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .team-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .team-title .text-accent {
+            color: var(--primary-color);
+        }
+
+        .team-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .team-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .team-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .team-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-card:hover .team-img {
+            transform: scale(1.1);
+        }
+
+        .team-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .team-position {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--background-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 100px 0;
+            background-color: var(--background-color);
+        }
+
+        .values-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .values-title .text-accent {
+            color: var(--accent-color);
+        }
+
+        .values-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .value-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .value-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-text {
+            color: var(--text-muted);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(29, 78, 216, 0.95)), url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: white;
+            color: var(--accent-color);
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .footer-logo .logo-highlight {
+            color: var(--accent-color);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-social-icon:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 12px;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-link a:hover {
+            color: white;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-icon {
+            color: var(--accent-color);
+        }
+
+        .footer-contact-text {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-newsletter {
+            margin-top: 20px;
+        }
+
+        .footer-newsletter-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .newsletter-button {
+            padding: 10px 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-button:hover {
+            background-color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Animations for elements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .navbar-links {
+                display: none;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .header-title {
+                font-size: 2.8rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text, .about-image {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid, .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 70px;
+                padding-right: 0;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .team-grid, .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-title {
+                font-size: 2.2rem;
+            }
+
+            .section-title, .team-title, .values-title, .cta-title, .stats-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .section-title, .team-title, .values-title, .cta-title, .stats-title {
+                font-size: 1.6rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Counter animation */
+        .count-up {
+            display: inline-block;
+        }
+
+        /* Animated background for CTA */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="javascript:void(0);" onclick="navegarA('inicio')" class="navbar-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Wispi Universidad</span>
+            </a>
+            <div class="navbar-links">
+                <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+                <a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('nosotros')" class="active">Nosotros</a>
+                <a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a>
+            </div>
+            <div class="navbar-cta">
+                <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="btn btn-secondary">Iniciar Sesión</a>
+                <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="btn btn-primary">Inscríbete</a>
+            </div>
+            <div class="mobile-menu-button" id="mobileMenuButton">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+            <a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a>
+            <a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a>
+            <a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a>
+            <a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a>
+        </div>
+        <div class="mobile-menu-cta">
+            <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="btn btn-secondary">Iniciar Sesión</a>
+            <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="btn btn-primary">Inscríbete</a>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <!-- Formas animadas de fondo -->
+        <div class="header-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        
+        <div class="container header-content">
+            <h3 class="header-subtitle" data-aos="fade-up" data-aos-delay="100">CONÓCENOS</h3>
+            <h1 class="header-title" data-aos="fade-up" data-aos-delay="200">Acerca de <span class="text-accent">Nosotros</span></h1>
+            <p class="header-description" data-aos="fade-up" data-aos-delay="300">Un equipo comprometido con la excelencia educativa y la innovación, transformando la manera en que las personas aprenden y se desarrollan profesionalmente.</p>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Nuestra Historia</h2>
+            
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <p>Iniciamos operaciones hace <span class="highlight">+25 años</span> con un solo objetivo, dar acceso a internet de calidad y con precios accesibles. A lo largo de los años, hemos evolucionado para convertirnos en un referente en educación tecnológica.</p>
+                    
+                    <p>Hoy podemos decir que el <span class="highlight">objetivo se ha cumplido</span>, cada día la confianza de nuestros clientes y amigos crece. Nuestro compromiso con la calidad educativa y la innovación nos ha permitido formar a miles de profesionales en diversas áreas tecnológicas.</p>
+                    
+                    <p>Hoy nuestra <span class="highlight">promesa de valor y lealtad</span> se ha transformado, continuaremos llegando hasta donde dijeron que no era posible, entregándote <span class="highlight">la mejor tecnología</span>, la red de mayor alcance, cobertura y capacidad, con un equipo listo para escucharte, atenderte y ayudarte a resolver cada desafío.</p>
+                </div>
+                
+                <div class="about-image" data-aos="fade-left">
+                    <div class="about-img-bg"></div>
+                    <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Universidad Xcien Campus" class="about-img">
+                </div>
+            </div>
+            
+            <div class="mission-vision">
+                <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="card-title">Nuestra Misión</h3>
+                    <p class="card-text">Proporcionar educación tecnológica de excelencia, accesible y relevante que ayude a las personas a desarrollar las habilidades necesarias para triunfar en un mundo digital en constante evolución, formando profesionales éticos y competentes.</p>
+                </div>
+                
+                <div class="vision-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="card-title">Nuestra Visión</h3>
+                    <p class="card-text">Ser reconocidos globalmente como líderes en educación tecnológica, pioneros en métodos pedagógicos innovadores y creadores de experiencias de aprendizaje transformadoras que impulsen el desarrollo social y económico de las comunidades donde operamos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Timeline Section -->
+    <section class="history-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up" style="text-align: center;">Nuestra Evolución</h2>
+            
+            <div class="history-container">
+                <div class="timeline">
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">1998</span>
+                            <h3 class="timeline-title">Fundación</h3>
+                            <p class="timeline-text">Comenzamos nuestras operaciones con el objetivo de brindar acceso a internet de calidad a precios accesibles.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2005</span>
+                            <h3 class="timeline-title">Expansión Nacional</h3>
+                            <p class="timeline-text">Ampliamos nuestras operaciones a nivel nacional, estableciendo una red de cobertura que llegó a más de 15 estados.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2010</span>
+                            <h3 class="timeline-title">Innovación Educativa</h3>
+                            <p class="timeline-text">Lanzamos nuestra primera plataforma educativa con cursos técnicos especializados en redes y telecomunicaciones.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2015</span>
+                            <h3 class="timeline-title">Universidad Xcien</h3>
+                            <p class="timeline-text">Nace oficialmente Universidad Xcien, enfocada en proporcionar educación tecnológica de alta calidad con certificaciones reconocidas internacionalmente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2020</span>
+                            <h3 class="timeline-title">Transformación Digital</h3>
+                            <p class="timeline-text">Implementamos una plataforma e-learning de vanguardia, ampliando nuestro catálogo de cursos y llegando a estudiantes en todo el país.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2025</span>
+                            <h3 class="timeline-title">Hacia el Futuro</h3>
+                            <p class="timeline-text">Continuamos innovando y expandiendo nuestras capacidades, con nuevas tecnologías y metodologías educativas para preparar a los profesionales del mañana.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section - CORREGIDO para mejor visibilidad -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="stats-title" data-aos="fade-up"><span class="text-accent">X</span>cien en Números</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number count-up" data-count="25">0</div>
+                    <p class="stat-text">Años de Experiencia</p>
+                </div>
+                
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number count-up" data-count="3500">0</div>
+                    <p class="stat-text">Clientes Activos</p>
+                </div>
+                
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number count-up" data-count="200">0</div>
+                    <p class="stat-text">Radiobases a Nivel Nacional</p>
+                </div>
+                
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-number count-up" data-count="200">0</div>
+                    <p class="stat-text">Colaboradores</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="team-intro">
+                <h2 class="team-title" data-aos="fade-up">Nuestro <span class="text-accent">Equipo</span></h2>
+                <p class="team-description" data-aos="fade-up" data-aos-delay="100">Contamos con un equipo de profesionales apasionados y comprometidos con la educación tecnológica, dedicados a proporcionar la mejor experiencia de aprendizaje a nuestros estudiantes.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1349&q=80" alt="Carlos Rodríguez" class="team-img">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Carlos Rodríguez</h3>
+                        <p class="team-position">Director General</p>
+                        <p class="team-bio">Con más de 20 años de experiencia en el sector educativo y tecnológico, Carlos lidera la visión estratégica de Universidad Xcien.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1349&q=80" alt="Ana Martínez" class="team-img">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Ana Martínez</h3>
+                        <p class="team-position">Directora Académica</p>
+                        <p class="team-bio">Especialista en diseño curricular y metodologías pedagógicas innovadoras, Ana supervisa la calidad académica de todos nuestros programas.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1349&q=80" alt="Ricardo Sánchez" class="team-img">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Ricardo Sánchez</h3>
+                        <p class="team-position">Director de Tecnología</p>
+                        <p class="team-bio">Con amplia experiencia en el desarrollo de plataformas educativas, Ricardo lidera la innovación tecnológica de nuestra institución.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="values-title" data-aos="fade-up">Nuestros <span class="text-accent">Valores</span></h2>
+            <p class="values-description" data-aos="fade-up" data-aos-delay="100">Estos principios guían nuestras acciones y decisiones, definiendo nuestra cultura organizacional y enfoque educativo.</p>
+            
+            <div class="values-grid">
+                <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="value-title">Excelencia</h3>
+                    <p class="value-text">Buscamos la máxima calidad en todo lo que hacemos, desde nuestros programas educativos hasta la atención al estudiante.</p>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="value-title">Innovación</h3>
+                    <p class="value-text">Nos adaptamos constantemente a las nuevas tecnologías y metodologías, buscando siempre mejorar la experiencia de aprendizaje.</p>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="value-title">Compromiso</h3>
+                    <p class="value-text">Estamos dedicados al éxito de nuestros estudiantes, apoyándolos en cada paso de su formación profesional.</p>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="value-title">Integridad</h3>
+                    <p class="value-text">Actuamos con honestidad, transparencia y ética en todas nuestras operaciones y relaciones.</p>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="value-title">Comunidad</h3>
+                    <p class="value-text">Fomentamos un sentido de pertenencia y colaboración entre estudiantes, docentes y personal.</p>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="value-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="value-title">Inclusión</h3>
+                    <p class="value-text">Creemos en la diversidad y trabajamos para que la educación tecnológica sea accesible para todos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <!-- Partículas animadas -->
+        <div class="cta-particles" id="particles"></div>
+        
+        <div class="container">
+            <h2 class="cta-title" data-aos="fade-up">¿Listo para formar parte de nuestra comunidad?</h2>
+            <p class="cta-description" data-aos="fade-up" data-aos-delay="100">Únete a miles de estudiantes que están transformando su futuro profesional con nuestra educación de calidad.</p>
+            <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="cta-btn" data-aos="fade-up" data-aos-delay="200">Comienza Hoy</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Columna 1: Logo e info -->
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span><span class="logo-highlight">X</span>cien</span>
+                    </div>
+                    <p class="footer-description">Transformamos el aprendizaje con una plataforma innovadora que combina tecnología ágil, metodologías prácticas y un sistema de certificaciones escalables.</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Columna 2: Enlaces rápidos -->
+                <div>
+                    <h3 class="footer-heading">Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 3: Módulos -->
+                <div>
+                    <h3 class="footer-heading">Módulos</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo1')">Fundamentos de Internet</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo2')">Direccionamiento IP</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo3')">Redes Legacy</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo4')">Firewalls y Ciberseguridad</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo5')">Cloud Computing</a></li>
+                        <li class="footer-link"><a href="javascript:void(0);" onclick="navegarA('modulo6')">Virtualización</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 4: Contacto -->
+                <div>
+                    <h3 class="footer-heading">Contacto</h3>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                        <div class="footer-contact-text">Martín de Zavala # 840, Col. Centro, CP 64000, Monterrey, N.L. México</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt footer-contact-icon"></i>
+                        <div class="footer-contact-text">800-288-0092</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope footer-contact-icon"></i>
+                        <div class="footer-contact-text">contacto@xcien.com</div>
+                    </div>
+                    
+                    <div class="footer-newsletter">
+                        <p class="footer-newsletter-text">Suscríbete a nuestro boletín</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Tu correo electrónico">
+                            <button type="submit" class="newsletter-button"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Universidad Xcien. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+            
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                
+                const menuIcon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+            
+            // Counter Animation
+            const countElements = document.querySelectorAll('.count-up');
+            
+            function animateCount() {
+                countElements.forEach(element => {
+                    const target = parseInt(element.getAttribute('data-count'));
+                    let count = 0;
+                    const duration = 2000; // 2 seconds
+                    const frameDuration = 1000 / 60; // 60fps
+                    const totalFrames = Math.ceil(duration / frameDuration);
+                    const increment = target / totalFrames;
+                    
+                    const counter = setInterval(() => {
+                        count += increment;
+                        
+                        if (count >= target) {
+                            element.textContent = target;
+                            clearInterval(counter);
+                        } else {
+                            element.textContent = Math.floor(count);
+                        }
+                    }, frameDuration);
+                });
+            }
+            
+            // Use Intersection Observer to trigger counter when visible
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCount();
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            // Observe stats section
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+            
+            // Create animated particles for CTA section
+            const particlesContainer = document.getElementById('particles');
+            if (particlesContainer) {
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Random position and size
+                    const size = Math.random() * 10 + 5; // 5-15px
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Random starting position
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.bottom = `${Math.random() * 20}%`;
+                    
+                    // Random animation delay
+                    particle.style.animationDelay = `${Math.random() * 10}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+        });
+
+        // Función para manejar la navegación entre páginas
+        function navegarA(pagina) {
+            // Verificar si estamos en la raíz o en una subcarpeta
+            const estaEnSubcarpeta = window.location.pathname.includes('/pages/');
+            
+            // Construir la ruta adecuada
+            let ruta = '';
+            
+            if (pagina === 'inicio') {
+                ruta = estaEnSubcarpeta ? '../index.html' : 'index.html';
+            } else if (pagina === 'capacitaciones') {
+                ruta = estaEnSubcarpeta ? 'capacitaciones.html' : 'pages/capacitaciones.html';
+            } else if (pagina === 'nosotros') {
+                ruta = estaEnSubcarpeta ? 'nosotros.html' : 'pages/nosotros.html';
+            } else if (pagina === 'certificaciones') {
+                ruta = estaEnSubcarpeta ? 'certificaciones.html' : 'pages/certificaciones.html';
+            } else if (pagina === 'contacto') {
+                ruta = estaEnSubcarpeta ? 'contacto.html' : 'pages/contacto.html';
+            } else if (pagina === 'iniciarsesion') {
+                ruta = estaEnSubcarpeta ? 'iniciarsesion.html' : 'pages/iniciarsesion.html';
+            } else if (pagina === 'inscribete') {
+                ruta = estaEnSubcarpeta ? 'inscribete.html' : 'pages/inscribete.html';
+            } else if (pagina === 'modulo1') {
+                ruta = estaEnSubcarpeta ? 'modulo1.html' : 'pages/modulo1.html';
+            } else if (pagina === 'modulo2') {
+                ruta = estaEnSubcarpeta ? 'modulo2.html' : 'pages/modulo2.html';
+            } else if (pagina === 'modulo3') {
+                ruta = estaEnSubcarpeta ? 'modulo3.html' : 'pages/modulo3.html';
+            } else if (pagina === 'modulo4') {
+                ruta = estaEnSubcarpeta ? 'modulo4.html' : 'pages/modulo4.html';
+            } else if (pagina === 'modulo5') {
+                ruta = estaEnSubcarpeta ? 'modulo5.html' : 'pages/modulo5.html';
+            } else if (pagina === 'modulo6') {
+                ruta = estaEnSubcarpeta ? 'modulo6.html' : 'pages/modulo6.html';
+            }
+            
+            // Navegar a la ruta
+            window.location.href = ruta;
+        }
+    </script>
+</body>
+</html>

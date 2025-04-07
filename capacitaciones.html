@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capacitaciones | Wispi Universidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #3B82F6;
+            --primary-dark: #1D4ED8;
+            --secondary-color: #0F172A;
+            --accent-color: #22D3EE;
+            --background-color: #F8FAFC;
+            --text-color: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Header Section */
+        .header {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, #2563EB, #1E40AF);
+            color: white;
+            text-align: center;
+        }
+
+        .header-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .header-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+
+        /* Estilos para reels verticales estilo TikTok/Instagram */
+        .reels-container-vertical {
+            height: 100vh; /* Altura completa de la ventana */
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            position: relative;
+            scrollbar-width: none; /* Ocultar scrollbar en Firefox */
+        }
+
+        .reels-container-vertical::-webkit-scrollbar {
+            display: none; /* Ocultar scrollbar en Chrome/Safari */
+        }
+
+        .reel-card-vertical {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            background-color: var(--secondary-color);
+        }
+
+        .reel-video-vertical {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reel-overlay-vertical {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            z-index: 10;
+        }
+
+        .reels-section-vertical {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reels-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+            color: white;
+            z-index: 20;
+            text-align: center;
+        }
+
+        .reels-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .reels-header p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .reel-controls {
+            position: absolute;
+            right: 20px;
+            bottom: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 15;
+        }
+
+        .reel-control-item {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reel-control-item:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        /* Featured Courses Section */
+        .modules-section {
+            padding: 80px 0;
+            background-color: var(--background-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: var(--text-muted);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .module-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .module-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .module-icon {
+            font-size: 4rem;
+            color: white;
+        }
+
+        .module-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .module-content {
+            padding: 25px;
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .module-description {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .module-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .module-lessons {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .module-duration {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+
+        .cta-btn {
+            background-color: white;
+            color: var(--primary-dark);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .navbar-links {
+                display: none; /* Menú móvil placeholder */
+            }
+
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .reels-container {
+                gap: 15px;
+            }
+
+            .reel-card {
+                flex: 0 0 250px;
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modules-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .reels-container {
+                gap: 10px;
+            }
+
+            .reel-card {
+                flex: 0 0 220px;
+                height: 400px;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="navbar-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Wispi Universidad</span>
+            </div>
+            <div class="navbar-links">
+                <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+                <a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a>
+                <a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a>
+            </div>
+            <div class="navbar-cta">
+                <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="btn btn-secondary">Iniciar Sesión</a>
+                <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="btn btn-primary">Inscríbete</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">Nuestras Capacitaciones</h1>
+            <p class="header-description">Descubre nuestro catálogo de capacitaciones especializadas diseñadas para potenciar tus habilidades profesionales y ayudarte a alcanzar tus metas de carrera.</p>
+        </div>
+    </header>
+
+    <!-- Video Reels Section (Estilo Vertical) -->
+    <section class="reels-section-vertical">
+        <div class="reels-header">
+            <h2>Descubre nuestras capacitaciones</h2>
+            <p>Desliza verticalmente para explorar nuestros programas de formación</p>
+        </div>
+        
+        <div class="reels-container-vertical">
+            <!-- Reel 1 -->
+            <div class="reel-card-vertical">
+                <video class="reel-video-vertical" loop muted playsinline>
+                    <!-- Aquí deberías agregar la ruta al video real -->
+                    <source src="#" type="video/mp4">
+                </video>
+                <div class="reel-overlay-vertical">
+                    <h3 class="reel-title">Fundamentos de Internet</h3>
+                    <div class="reel-instructor">
+                        <div class="instructor-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Prof. Martínez</span>
+                    </div>
+                </div>
+                <div class="reel-controls">
+                    <div class="reel-control-item">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reel 2 -->
+            <div class="reel-card-vertical">
+                <video class="reel-video-vertical" loop muted playsinline>
+                    <source src="#" type="video/mp4">
+                </video>
+                <div class="reel-overlay-vertical">
+                    <h3 class="reel-title">Direccionamiento IP</h3>
+                    <div class="reel-instructor">
+                        <div class="instructor-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Ing. Rodriguez</span>
+                    </div>
+                </div>
+                <div class="reel-controls">
+                    <div class="reel-control-item">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reel 3 -->
+            <div class="reel-card-vertical">
+                <video class="reel-video-vertical" loop muted playsinline>
+                    <source src="#" type="video/mp4">
+                </video>
+                <div class="reel-overlay-vertical">
+                    <h3 class="reel-title">Redes Legacy</h3>
+                    <div class="reel-instructor">
+                        <div class="instructor-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Dra. Sánchez</span>
+                    </div>
+                </div>
+                <div class="reel-controls">
+                    <div class="reel-control-item">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reel 4 -->
+            <div class="reel-card-vertical">
+                <video class="reel-video-vertical" loop muted playsinline>
+                    <source src="#" type="video/mp4">
+                </video>
+                <div class="reel-overlay-vertical">
+                    <h3 class="reel-title">Firewalls y Ciberseguridad</h3>
+                    <div class="reel-instructor">
+                        <div class="instructor-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Ing. Gómez</span>
+                    </div>
+                </div>
+                <div class="reel-controls">
+                    <div class="reel-control-item">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="reel-control-item">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules-section">
+        <div class="container">
+            <h2 class="section-title">Módulos de Capacitación</h2>
+            <p class="section-subtitle">Explora nuestros módulos especializados y empieza tu camino hacia el crecimiento profesional</p>
+            
+            <div class="modules-grid">
+                <!-- Módulo 1 -->
+                <a href="modulo1.html" class="module-card">
+                    <div class="module-image">
+                        <img src="#" alt="Fundamentos de Internet" class="module-img">
+                    </div>
+                    <div class="module-content">
+                        <h3 class="module-title">Módulo 1: Fundamentos de Internet</h3>
+                        <p class="module-description">Historia de Internet: desde ARPANET y TCP/IP hasta la Web de Berners-Lee y su evolución (1.0 a 3.0). Clave para entender la tecnología actual</p>
+                        <div class="module-meta">
+                            <div class="module-lessons">
+                                <i class="fas fa-book"></i>
+                                <span>8 lecciones</span>
+                            </div>
+                            <div class="module-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>6 horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Módulo 2 -->
+                <a href="modulo2.html" class="module-card">
+                    <div class="module-image">
+                        <img src="#" alt="Direccionamiento IP" class="module-img">
+                    </div>
+                    <div class="module-content">
+                        <h3 class="module-title">Módulo 2: Direccionamiento IP</h3>
+                        <p class="module-description">Domina los fundamentos: estructura de IPv4, subredes, agotamiento de direcciones y el salto a IPv6. Aprende a configurar redes, entender la coexistencia IPv4/IPv6 y gestionar direcciones en entornos reales.</p>
+                        <div class="module-meta">
+                            <div class="module-lessons">
+                                <i class="fas fa-book"></i>
+                                <span>12 lecciones</span>
+                            </div>
+                            <div class="module-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>10 horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Módulo 3 -->
+                <a href="modulo3.html" class="module-card">
+                    <div class="module-image">
+                        <img src="#" alt="Redes Legacy" class="module-img">
+                    </div>
+                    <div class="module-content">
+                        <h3 class="module-title">Módulo 3: Redes Legacy</h3>
+                        <p class="module-description">Domina redes heredadas: arquitectura, componentes (routers, switches, cableado), configuración de VLANs/STP y enrutamiento (RIP, OSPF). Diagnostica fallas con ping/traceroute.</p>
+                        <div class="module-meta">
+                            <div class="module-lessons">
+                                <i class="fas fa-book"></i>
+                                <span>10 lecciones</span>
+                            </div>
+                            <div class="module-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>9 horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Módulo 4 -->
+                <a href="modulo4.html" class="module-card">
+                    <div class="module-image">
+                        <img src="#" alt="Firewalls y Ciberseguridad" class="module-img">
+                    </div>
+                    <div class="module-content">
+                        <h3 class="module-title">Módulo 4: Firewalls y Ciberseguridad</h3>
+                        <p class="module-description">Protege redes con estrategias integrales: desde fundamentos (CIA, amenazas actuales) hasta firewalls (NGFW, DMZ, VPNs), IDS/IPS, gestión de vulnerabilidades y modelos avanzados.</p>
+                        <div class="module-meta">
+                            <div class="module-lessons">
+                                <i class="fas fa-book"></i>
+                                <span>15 lecciones</span>
+                            </div>
+                            <div class="module-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>12 horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Módulo 5 (Ejemplo de módulo adicional) -->
+                <a href="modulo5.html" class="module-card">
+                    <div class="module-image">
+                        <img src="#" alt="Cloud Computing" class="module-img">
+                    </div>
+                    <div class="module-content">
+                        <h3 class="module-title">Módulo 5: Cloud Computing</h3>
+                        <p class="module-description">Explora la computación en la nube: modelos de servicio (IaaS, PaaS, SaaS), principales proveedores, arquitecturas, seguridad y estrategias de implementación para empresas.</p>
+                        <div class="module-meta">
+                            <div class="module-lessons">
+                                <i class="fas fa-book"></i>
+                                <span>14 lecciones</span>
+                            </div>
+                            <div class="module-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>11 horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Módulo 6 (Ejemplo de módulo adicional) -->
+                <a href="modulo6.html" class="module-card">
+                    <div class="module-image">
+                        <img src="#" alt="Virtualización" class="module-img">
+                    </div>
+                    <div class="module-content">
+                        <h3 class="module-title">Módulo 6: Virtualización</h3>
+                        <p class="module-description">Aprende sobre tecnologías de virtualización: hipervisores, contenedores, redes virtuales, almacenamiento y aplicaciones prácticas en entornos empresariales.</p>
+                        <div class="module-meta">
+                            <div class="module-lessons">
+                                <i class="fas fa-book"></i>
+                                <span>9 lecciones</span>
+                            </div>
+                            <div class="module-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>8 horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">¿Listo para iniciar tu crecimiento profesional?</h2>
+            <p class="cta-description">Inscríbete ahora y accede inmediatamente a todos nuestros módulos de capacitación, tutorías personalizadas y certificaciones reconocidas por la industria.</p>
+            <a href="inscribete.html" class="cta-btn">Comienza Hoy</a>
+        </div>
+    </section>
+
+    <!-- Video Modal (para reproducir videos al hacer clic en los reels) -->
+    <div id="videoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 2000;">
+        <div style="position: relative; width: 80%; max-width: 800px; margin: 5% auto; padding: 20px; background-color: black; border-radius: 8px;">
+            <button id="closeModal" style="position: absolute; top: 10px; right: 10px; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+            <video id="modalVideo" controls style="width: 100%; border-radius: 8px;">
+                <source src="" type="video/mp4">
+            </video>
+            <div style="margin-top: 15px; color: white;">
+                <h3 id="modalTitle" style="font-size: 1.5rem; margin-bottom: 5px;">Título del Video</h3>
+                <p id="modalInstructor" style="color: #ccc;">Instructor</p>
+                <p id="modalDescription" style="margin-top: 10px; color: #eee;">Descripción del video</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script para interactividad del modal de video
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoModal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalInstructor = document.getElementById('modalInstructor');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Cerrar modal
+            closeModal.addEventListener('click', function() {
+                modalVideo.pause();
+                videoModal.style.display = 'none';
+            });
+            
+            // Cerrar modal al hacer clic fuera del contenido
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    modalVideo.pause();
+                    videoModal.style.display = 'none';
+                }
+            });
+            
+            // Cerrar modal con la tecla Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.style.display === 'block') {
+                    modalVideo.pause();
+                    videoModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <!-- Script para controlar la reproducción automática de los reels verticales -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const reelContainer = document.querySelector('.reels-container-vertical');
+        const videos = document.querySelectorAll('.reel-video-vertical');
+        
+        // Desactivar la reproducción automática para todos los videos sin fuente válida
+        videos.forEach(video => {
+            const source = video.querySelector('source');
+            if (source && (source.getAttribute('src') === '#' || source.getAttribute('src') === '')) {
+                // Remover atributos que activan reproducción automática
+                video.removeAttribute('autoplay');
+                
+                // Añadir un poster/thumbnail en lugar del video
+                video.setAttribute('poster', 'https://via.placeholder.com/800x450/0F172A/FFFFFF?text=Video+Coming+Soon');
+            }
+        });
+        
+        // Función modificada para manejar scroll
+        function handleScroll() {
+            const containerRect = reelContainer.getBoundingClientRect();
+            
+            videos.forEach(video => {
+                const source = video.querySelector('source');
+                // Solo intentar reproducir videos con fuentes válidas
+                if (source && source.getAttribute('src') !== '#' && source.getAttribute('src') !== '') {
+                    const videoRect = video.getBoundingClientRect();
+                    const isVisible = (
+                        videoRect.top >= containerRect.top - videoRect.height/2 &&
+                        videoRect.bottom <= containerRect.bottom + videoRect.height/2
+                    );
+                    
+                    if (isVisible) {
+                        if (video.paused) {
+                            try {
+                                const playPromise = video.play();
+                                // Manejar la promesa para evitar errores no capturados
+                                if (playPromise !== undefined) {
+                                    playPromise.catch(() => {
+                                        // No hacer nada si falla el autoplay
+                                    });
+                                }
+                            } catch (e) {
+                                // Manejar cualquier error silenciosamente
+                            }
+                        }
+                    } else {
+                        if (!video.paused) video.pause();
+                    }
+                }
+            });
+        }
+        
+        // No reproducir automáticamente ningún video al cargar
+        // Solo adjuntar el event listener para scroll
+        reelContainer.addEventListener('scroll', handleScroll);
+        
+        // Versión modificada del controlador de clics
+        videos.forEach(video => {
+            video.addEventListener('click', function() {
+                const source = this.querySelector('source');
+                // Verificar si tiene una fuente válida
+                if (source && source.getAttribute('src') !== '#' && source.getAttribute('src') !== '') {
+                    if (this.paused) {
+                        try {
+                            const playPromise = this.play();
+                            if (playPromise !== undefined) {
+                                playPromise.catch(() => {
+                                    // No hacer nada si falla la reproducción
+                                });
+                            }
+                        } catch (e) {
+                            // Manejar cualquier error silenciosamente
+                        }
+                    } else {
+                        this.pause();
+                    }
+                } else {
+                    // Si no hay fuente, podríamos mostrar un mensaje o abrir el modal con contenido alternativo
+                    alert('Video no disponible. Próximamente.');
+                }
+            });
+        });
+    });
+</script>
+    </section>
+</div>
+
+<!-- Agregar el script justo aquí, antes del cierre del body -->
+<script>
+  // Función para manejar la navegación
+  function navegarA(pagina) {
+    // Verificar si estamos en la raíz o en una subcarpeta
+    const estaEnSubcarpeta = window.location.pathname.includes('/pages/');
+    
+    // Construir la ruta adecuada
+    let ruta = '';
+    
+    if (pagina === 'inicio') {
+      ruta = estaEnSubcarpeta ? '../index.html' : 'index.html';
+    } else if (pagina === 'capacitaciones') {
+      ruta = estaEnSubcarpeta ? 'capacitaciones.html' : 'pages/capacitaciones.html';
+    } else if (pagina === 'nosotros') {
+      ruta = estaEnSubcarpeta ? 'nosotros.html' : 'pages/nosotros.html';
+    } else if (pagina === 'certificaciones') {
+      ruta = estaEnSubcarpeta ? 'certificaciones.html' : 'pages/certificaciones.html';
+    } else if (pagina === 'contacto') {
+      ruta = estaEnSubcarpeta ? 'contacto.html' : 'pages/contacto.html';
+    } else if (pagina === 'iniciarsesion') {
+      ruta = estaEnSubcarpeta ? 'iniciarsesion.html' : 'pages/iniciarsesion.html';
+    } else if (pagina === 'inscribete') {
+      ruta = estaEnSubcarpeta ? 'inscribete.html' : 'pages/inscribete.html';
+    } else if (pagina === 'modulo1') {
+      ruta = estaEnSubcarpeta ? 'modulo1.html' : 'pages/modulo1.html';
+    } else if (pagina === 'modulo2') {
+      ruta = estaEnSubcarpeta ? 'modulo2.html' : 'pages/modulo2.html';
+    } else if (pagina === 'modulo3') {
+      ruta = estaEnSubcarpeta ? 'modulo3.html' : 'pages/modulo3.html';
+    } else if (pagina === 'modulo4') {
+      ruta = estaEnSubcarpeta ? 'modulo4.html' : 'pages/modulo4.html';
+    } else if (pagina === 'modulo5') {
+      ruta = estaEnSubcarpeta ? 'modulo5.html' : 'pages/modulo5.html';
+    }
+    
+    // Navegar a la ruta
+    window.location.href = ruta;
+  }
+</script>
+</body>
+</html>
+</body>
+</html>

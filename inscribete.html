@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscríbete | Universidad Xcien</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #3B82F6;
+            --primary-dark: #1D4ED8;
+            --secondary-color: #0F172A;
+            --accent-color: #22D3EE;
+            --background-color: #F8FAFC;
+            --text-color: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --success-color: #10B981;
+            --error-color: #EF4444;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Register Section */
+        .register-section {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(30, 64, 175, 0.05));
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .register-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .register-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .register-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 15px;
+            color: var(--text-muted);
+        }
+
+        .input-with-icon {
+            padding-left: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            font-size: 0.85rem;
+        }
+
+        .strength-weak {
+            color: var(--error-color);
+        }
+
+        .strength-medium {
+            color: #F59E0B; /* Amber */
+        }
+
+        .strength-strong {
+            color: var(--success-color);
+        }
+
+        .password-bars {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .password-bar {
+            height: 4px;
+            flex: 1;
+            background-color: var(--border-color);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .bar-active {
+            background-color: var(--success-color);
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 3px;
+        }
+
+        .checkbox-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkbox-input {
+            display: none;
+        }
+
+        .checkbox-input:checked + .checkbox-custom {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkbox-input:checked + .checkbox-custom::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+        }
+
+        .terms-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .terms-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .terms-link:hover {
+            text-decoration: underline;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            margin: 15px 0 30px;
+        }
+
+        .social-login {
+            margin-bottom: 25px;
+        }
+
+        .social-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-text::before,
+        .social-text::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+
+        .social-text::before {
+            left: 0;
+        }
+
+        .social-text::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            background-color: var(--background-color);
+            transform: translateY(-3px);
+        }
+
+        .facebook-btn {
+            color: #4267B2;
+        }
+
+        .google-btn {
+            color: #DB4437;
+        }
+
+        .microsoft-btn {
+            color: #00A1F1;
+        }
+
+        .login-prompt {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .login-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Decorative elements */
+        .register-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .register-shape {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .register-shape-1 {
+            width: 400px;
+            height: 400px;
+            top: -200px;
+            left: -200px;
+            animation: float-slow 15s infinite ease-in-out;
+        }
+
+        .register-shape-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -150px;
+            right: -150px;
+            animation: float-slow 12s infinite ease-in-out reverse;
+        }
+
+        .register-shape-3 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            left: 20%;
+            animation: float-slow 18s infinite ease-in-out 2s;
+        }
+
+        @keyframes float-slow {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(20px, 20px) rotate(10deg);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .navbar-links {
+                display: none; /* Menú móvil placeholder */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .register-container {
+                max-width: 90%;
+                padding: 30px;
+            }
+
+            .register-title {
+                font-size: 1.8rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 25px;
+            }
+
+            .social-text::before,
+            .social-text::after {
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="javascript:void(0);" onclick="navegarA('inicio')" class="navbar-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Wispi Universidad</span>
+            </a>
+            <div class="navbar-links">
+                <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+                <a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a>
+                <a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a>
+            </div>
+            <div class="navbar-cta">
+                <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="btn btn-secondary">Iniciar Sesión</a>
+                <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="btn btn-primary">Inscríbete</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Elementos decorativos de fondo -->
+    <div class="register-shapes">
+        <div class="register-shape register-shape-1"></div>
+        <div class="register-shape register-shape-2"></div>
+        <div class="register-shape register-shape-3"></div>
+    </div>
+
+    <!-- Sección de Registro -->
+    <section class="register-section">
+        <div class="register-container">
+            <div class="register-header">
+                <div class="register-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h1 class="register-title">Crea tu cuenta</h1>
+                <p class="register-subtitle">Únete a nuestra comunidad educativa</p>
+            </div>
+            
+            <form id="registerForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">Nombre</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="firstName" name="firstName" class="form-input input-with-icon" placeholder="Tu nombre" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Apellido</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="lastName" name="lastName" class="form-input input-with-icon" placeholder="Tu apellido" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="email" name="email" class="form-input input-with-icon" placeholder="correo@ejemplo.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" name="password" class="form-input input-with-icon" placeholder="Crea una contraseña segura" required>
+                            <span class="password-toggle" id="passwordToggle">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="password-bars">
+                                <div class="password-bar" id="bar1"></div>
+                                <div class="password-bar" id="bar2"></div>
+                                <div class="password-bar" id="bar3"></div>
+                            </div>
+                            <span id="strengthText">La contraseña debe tener al menos 8 caracteres</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input input-with-icon" placeholder="Confirma tu contraseña" required>
+                            <span class="password-toggle" id="confirmPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="company" class="form-label">Empresa (opcional)</label>
+                        <div class="input-group">
+                            <i class="fas fa-building input-icon"></i>
+                            <input type="text" id="company" name="company" class="form-input input-with-icon" placeholder="Nombre de tu empresa">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="terms-checkbox">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="terms" name="terms" class="checkbox-input" required>
+                        <label for="terms" class="checkbox-custom"></label>
+                    </div>
+                    <div class="terms-text">
+                        Acepto los <a href="#" class="terms-link">Términos y Condiciones</a> y la <a href="#" class="terms-link">Política de Privacidad</a> de Universidad Xcien.
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary register-btn">Crear cuenta</button>
+            </form>
+            
+            <div class="social-login">
+                <p class="social-text">O regístrate con</p>
+                <div class="social-buttons">
+                    <button class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button class="social-btn google-btn">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button class="social-btn microsoft-btn">
+                        <i class="fab fa-microsoft"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="login-prompt">
+                <p>¿Ya tienes una cuenta? <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="login-link">Inicia sesión</a></p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Función para manejar la navegación
+        function navegarA(pagina) {
+            // Verificar si estamos en la raíz o en una subcarpeta
+            const estaEnSubcarpeta = window.location.pathname.includes('/pages/');
+            
+            // Construir la ruta adecuada
+            let ruta = '';
+            
+            if (pagina === 'inicio') {
+                ruta = estaEnSubcarpeta ? '../index.html' : 'index.html';
+            } else if (pagina === 'capacitaciones') {
+                ruta = estaEnSubcarpeta ? 'capacitaciones.html' : 'pages/capacitaciones.html';
+            } else if (pagina === 'nosotros') {
+                ruta = estaEnSubcarpeta ? 'nosotros.html' : 'pages/nosotros.html';
+            } else if (pagina === 'certificaciones') {
+                ruta = estaEnSubcarpeta ? 'certificaciones.html' : 'pages/certificaciones.html';
+            } else if (pagina === 'contacto') {
+                ruta = estaEnSubcarpeta ? 'contacto.html' : 'pages/contacto.html';
+            } else if (pagina === 'iniciarsesion') {
+                ruta = estaEnSubcarpeta ? 'iniciarsesion.html' : 'pages/iniciarsesion.html';
+            } else if (pagina === 'inscribete') {
+                ruta = estaEnSubcarpeta ? 'inscribete.html' : 'pages/inscribete.html';
+            }
+            
+            // Navegar a la ruta
+            window.location.href = ruta;
+        }
+
+        // Interacción para mostrar/ocultar contraseña
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirmPassword');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+            
+            // Toggle para el campo de contraseña
+            passwordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(passwordField, passwordToggle);
+            });
+            
+            // Toggle para el campo de confirmar contraseña
+            confirmPasswordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(confirmPasswordField, confirmPasswordToggle);
+            });
+            
+            function togglePasswordVisibility(field, toggle) {
+                const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+                field.setAttribute('type', type);
+                
+                // Cambiar el icono
+                const icon = toggle.querySelector('i');
+                if (type === 'password') {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                } else {
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                }
+            }
+            
+            // Verificador de fortaleza de contraseña
+            const bar1 = document.getElementById('bar1');
+            const bar2 = document.getElementById('bar2');
+            const bar3 = document.getElementById('bar3');
+            const strengthText = document.getElementById('strengthText');
+            
+            passwordField.addEventListener('input', function() {
+                const password = this.value;
+                const strength = checkPasswordStrength(password);
+                
+                // Resetear barras
+                bar1.className = 'password-bar';
+                bar2.className = 'password-bar';
+                bar3.className = 'password-bar';
+                
+                if (password.length === 0) {
+                    strengthText.textContent = 'La contraseña debe tener al menos 8 caracteres';
+                    strengthText.className = '';
+                } else if (strength === 1) {
+                    bar1.classList.add('bar-active');
+                    strengthText.textContent = 'Contraseña débil';
+                    strengthText.className = 'strength-weak';
+                } else if (strength === 2) {
+                    bar1.classList.add('bar-active');
+                    bar2.classList.add('bar-active');
+                    strengthText.textContent = 'Contraseña media';
+                    strengthText.className = 'strength-medium';
+                } else {
+                    bar1.classList.add('bar-active');
+                    bar2.classList.add('bar-active');
+                    bar3.classList.add('bar-active');
+                    strengthText.textContent = 'Contraseña fuerte';
+                    strengthText.className = 'strength-strong';
+                }
+            });
+            
+            function checkPasswordStrength(password) {
+                // Criterios básicos de fortaleza
+                const hasMinLength = password.length >= 8;
+                const hasUppercase = /[A-Z]/.test(password);
+                const hasLowercase = /[a-z]/.test(password);
+                const hasNumbers = /\d/.test(password);
+                const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                
+                const criteria = [hasMinLength, hasUppercase, hasLowercase, hasNumbers, hasSpecialChars];
+                const metCriteria = criteria.filter(Boolean).length;
+                
+                if (metCriteria <= 2) return 1; // Débil
+                if (metCriteria <= 4) return 2; // Media
+                return 3; // Fuerte
+            }
+            
+            // Validación del formulario
+            const registerForm = document.getElementById('registerForm');
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validar que las contraseñas coincidan
+                if (passwordField.value !== confirmPasswordField.value) {
+                    alert('Las contraseñas no coinciden');
+                    return;
+                }
+                
+                // Aquí iría la lógica para enviar los datos al servidor
+                // Por ahora, solo mostramos un mensaje
+                const email = document.getElementById('email').value;
+                const firstName = document.getElementById('firstName').value;
+                
+                alert(`¡Registro exitoso para ${firstName}! Bienvenido a Universidad Xcien.`);
+                
+                // Simulación de redirección
+                // window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>

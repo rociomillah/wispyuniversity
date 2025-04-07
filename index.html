@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Xcien | Excelencia Educativa e Innovación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #3B82F6;
+            --primary-dark: #1D4ED8;
+            --secondary-color: #0F172A;
+            --accent-color: #22D3EE;
+            --background-color: #F8FAFC;
+            --text-color: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* HERO SECTION ANIMADO */
+        .hero {
+            padding: 180px 0 150px;
+            background: linear-gradient(135deg, #2563EB, #1E40AF);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Elementos animados */
+        .hero-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -50px;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -50px;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            left: 70%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(20px, 20px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        /* Partículas animadas para el Hero Section */
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Contenido del héroe */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .btn-hero {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-hero-primary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-hero-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--background-color);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .feature-description {
+            color: var(--text-muted);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .navbar-links {
+                display: none; /* Menú móvil placeholder */
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .btn-hero {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="navbar-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Wispi Universidad</span>
+            </div>
+            <div class="navbar-links">
+                <a href="javascript:void(0);" onclick="navegarA('inicio')">Inicio</a>
+                <a href="javascript:void(0);" onclick="navegarA('capacitaciones')">Capacitaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('nosotros')">Nosotros</a>
+                <a href="javascript:void(0);" onclick="navegarA('certificaciones')">Certificaciones</a>
+                <a href="javascript:void(0);" onclick="navegarA('contacto')">Contacto</a>
+            </div>
+            <div class="navbar-cta">
+                <a href="javascript:void(0);" onclick="navegarA('iniciarsesion')" class="btn btn-secondary">Iniciar Sesión</a>
+                <a href="javascript:void(0);" onclick="navegarA('inscribete')" class="btn btn-primary">Inscríbete</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Animado -->
+    <header class="hero">
+        <!-- Partículas animadas -->
+        <div class="hero-particles" id="heroParticles"></div>
+        
+        <!-- Formas animadas de fondo -->
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Universidad XCIEN: Tu Camino al Crecimiento Profesional</h1>
+                <p class="hero-subtitle">Transformamos el aprendizaje corporativo con una plataforma innovadora que combina tecnología ágil, metodologías prácticas y un sistema de certificaciones escalables. En Universidad XCIEN, cada curso modular, video interactivo y evaluación práctica está diseñado para que desarrolles habilidades clave, avances en tu carrera y contribuyas al éxito de la empresa.</p>
+                <div class="hero-cta">
+                    <a href="pages/capacitaciones.html" class="btn btn-hero btn-hero-primary">Descubre nuestras capacitaciones</a>
+                    <a href="pages/contacto.html" class="btn btn-hero btn-hero-secondary">Contáctanos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección de Módulos -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Nuestros Módulos de Capacitación</h2>
+            <div class="features-grid">
+                <!-- Módulo 1 - Clickeable -->
+                <div onclick="window.location.href='pages/modulo1.html'" class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="feature-title">Modulo 1 FUNDAMENTOS DE INTERNET</h3>
+                    <p class="feature-description">Historia de Internet: desde ARPANET y TCP/IP hasta la Web de Berners-Lee y su evolución (1.0 a 3.0). Clave para entender la tecnología actual</p>
+                </div>
+                
+                <!-- Módulo 2 - Clickeable -->
+                <div onclick="window.location.href='pages/modulo2.html'" class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="feature-title">MODULO 2 DIRECCIONAMIENTO IP</h3>
+                    <p class="feature-description">Domina los fundamentos: estructura de IPv4, subredes, agotamiento de direcciones y el salto a IPv6. Aprende a configurar redes, entender la coexistencia IPv4/IPv6 y gestionar direcciones en entornos reales. Esencial para diseñar, optimizar y mantener redes escalables.</p>
+                </div>
+                
+                <!-- Módulo 3 - Clickeable -->
+                <div onclick="window.location.href='pages/modulo3.html'" class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="feature-title">MODULO 3 REDES LEGACY</h3>
+                    <p class="feature-description">Domina redes heredadas: arquitectura, componentes (routers, switches, cableado), configuración de VLANs/STP y enrutamiento (RIP, OSPF). Diagnostica fallas con ping/traceroute e integra redes legacy con modernas mediante migración escalable. Desde bases hasta gestión de infraestructuras híbridas.</p>
+                </div>
+                
+                <!-- Módulo 4 - Clickeable -->
+                <div onclick="window.location.href='pages/modulo4.html'" class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">MODULO 4 FIREWALLS Y CIBERSEGURIDAD</h3>
+                    <p class="feature-description">Protege redes con estrategias integrales: desde fundamentos (CIA, amenazas actuales) hasta firewalls (NGFW, DMZ, VPNs), IDS/IPS, gestión de vulnerabilidades y modelos avanzados (Zero Trust, SIEM). Incluye venta de soluciones basadas en riesgo y cumplimiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Función para manejar la navegación
+        function navegarA(pagina) {
+          // Verificar si estamos en la raíz o en una subcarpeta
+          const estaEnSubcarpeta = window.location.pathname.includes('/pages/');
+          
+          // Construir la ruta adecuada
+          let ruta = '';
+          
+          if (pagina === 'inicio') {
+            ruta = estaEnSubcarpeta ? '../index.html' : 'index.html';
+          } else if (pagina === 'capacitaciones') {
+            ruta = estaEnSubcarpeta ? 'capacitaciones.html' : 'pages/capacitaciones.html';
+          } else if (pagina === 'nosotros') {
+            ruta = estaEnSubcarpeta ? 'nosotros.html' : 'pages/nosotros.html';
+          } else if (pagina === 'certificaciones') {
+            ruta = estaEnSubcarpeta ? 'certificaciones.html' : 'pages/certificaciones.html';
+          } else if (pagina === 'contacto') {
+            ruta = estaEnSubcarpeta ? 'contacto.html' : 'pages/contacto.html';
+          } else if (pagina === 'iniciarsesion') {
+            ruta = estaEnSubcarpeta ? 'iniciarsesion.html' : 'pages/iniciarsesion.html';
+          } else if (pagina === 'inscribete') {
+            ruta = estaEnSubcarpeta ? 'inscribete.html' : 'pages/inscribete.html';
+          }
+          
+          // Navegar a la ruta
+          window.location.href = ruta;
+        }
+      </script>
+      
+      <!-- Crear partículas animadas para el hero section -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('heroParticles');
+            if (particlesContainer) {
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Tamaño aleatorio
+                    const size = Math.random() * 10 + 5; // 5-15px
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Posición inicial aleatoria
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.bottom = `${Math.random() * 20}%`;
+                    
+                    // Retraso de animación aleatorio
+                    particle.style.animationDelay = `${Math.random() * 10}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+        });
+      </script>
+</body>
+</html>

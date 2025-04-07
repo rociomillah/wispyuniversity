@@ -1,0 +1,361 @@
+{
+  `path`: `e-learning-platform/assets/js/main.js`,
+  `content`: `// Variables globales
+const burger = document.querySelector('.burger');
+const navLinks = document.querySelector('.nav-links');
+const authButtons = document.querySelector('.auth-buttons');
+
+// Navegación móvil
+if (burger) {
+    burger.addEventListener('click', () => {
+        // Toggle para la navegación móvil
+        navLinks.classList.toggle('nav-active');
+        authButtons.classList.toggle('nav-active');
+        
+        // Animación del burger
+        burger.classList.toggle('toggle');
+    });
+}
+
+// Añadir estilos adicionales para la navegación móvil
+const navActiveStyles = `
+    .nav-active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        top: 80px;
+        background-color: white;
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        align-items: center;
+    }
+    
+    .nav-links.nav-active {
+        margin-bottom: 20px;
+    }
+    
+    .nav-links.nav-active li {
+        margin: 15px 0;
+    }
+    
+    .auth-buttons.nav-active {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .auth-buttons.nav-active a {
+        width: 200px;
+        text-align: center;
+    }
+    
+    .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .toggle .line2 {
+        opacity: 0;
+    }
+    
+    .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+`;
+
+// Agregar estilos dinámicamente
+const styleSheet = document.createElement('style');
+styleSheet.type = 'text/css';
+styleSheet.innerText = navActiveStyles;
+document.head.appendChild(styleSheet);
+
+// Funcionalidad para el acordeón de módulos del curso
+document.addEventListener('DOMContentLoaded', function() {
+    const moduleHeaders = document.querySelectorAll('.module-header');
+    if (moduleHeaders.length > 0) {
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isOpen = header.classList.contains('open');
+                
+                // Cerrar todos los módulos abiertos
+                document.querySelectorAll('.module-header.open').forEach(openHeader => {
+                    if (openHeader !== header) {
+                        openHeader.classList.remove('open');
+                        openHeader.nextElementSibling.style.display = 'none';
+                    }
+                });
+                
+                // Abrir o cerrar el módulo actual
+                if (isOpen) {
+                    header.classList.remove('open');
+                    content.style.display = 'none';
+                } else {
+                    header.classList.add('open');
+                    content.style.display = 'block';
+                }
+            });
+            
+            // Inicialmente, ocultar todos los contenidos excepto el primero
+            if (header !== moduleHeaders[0]) {
+                header.nextElementSibling.style.display = 'none';
+            } else {
+                header.classList.add('open');
+            }
+        });
+    }
+});
+
+// Funcionalidad para el boletín de noticias
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const emailInput = this.querySelector('input[type=\"email\"]');
+        const email = emailInput.value.trim();
+        
+        if (email) {
+            // Aquí se manejaría la suscripción a través de una API o servicio
+            // Por ahora, solo mostramos un mensaje de éxito
+            
+            // Crear un elemento para el mensaje
+            const successMessage = document.createElement('div');
+            successMessage.className = 'success-message';
+            successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás noticias sobre nuestros cursos.';
+            successMessage.style.backgroundColor = '#2ecc71';
+            successMessage.style.color = '#fff';
+            successMessage.style.padding = '15px';
+            successMessage.style.borderRadius = '5px';
+            successMessage.style.marginTop = '20px';
+            
+            // Limpiar el formulario y mostrar el mensaje
+            emailInput.value = '';
+            const formParent = newsletterForm.parentElement;
+            formParent.appendChild(successMessage);
+            
+            // Eliminar el mensaje después de 5 segundos
+            setTimeout(() => {
+                formParent.removeChild(successMessage);
+            }, 5000);
+        }
+    });
+}
+
+// Funcionalidad de búsqueda en el catálogo de cursos
+const searchForm = document.querySelector('.search-box');
+if (searchForm) {
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const searchInput = this.querySelector('input');
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        
+        if (searchTerm) {
+            // En una aplicación real, aquí realizaríamos una búsqueda en la base de datos
+            // Por ahora, filtramos los cursos que ya están en la página
+            
+            const courses = document.querySelectorAll('.course-card');
+            let foundCourses = 0;
+            
+            courses.forEach(course => {
+                const courseTitle = course.querySelector('h3').textContent.toLowerCase();
+                const courseDescription = course.querySelector('.course-description').textContent.toLowerCase();
+                
+                if (courseTitle.includes(searchTerm) || courseDescription.includes(searchTerm)) {
+                    course.style.display = 'block';
+                    foundCourses++;
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+            
+            // Mostrar mensaje si no hay resultados
+            const resultsContainer = document.querySelector('.courses-grid');
+            const noResultsMessage = document.getElementById('no-results-message');
+            
+            if (foundCourses === 0) {
+                if (!noResultsMessage) {
+                    const message = document.createElement('div');
+                    message.id = 'no-results-message';
+                    message.className = 'no-results';
+                    message.textContent = 'No se encontraron cursos que coincidan con tu búsqueda.';
+                    message.style.textAlign = 'center';
+                    message.style.padding = '20px';
+                    message.style.width = '100%';
+                    message.style.gridColumn = '1 / -1';
+                    
+                    resultsContainer.appendChild(message);
+                }
+            } else if (noResultsMessage) {
+                noResultsMessage.remove();
+            }
+        }
+    });
+}
+
+// Implementar sistema de filtrado para el catálogo
+const filterForm = document.querySelector('.filters-container');
+if (filterForm) {
+    const categoryFilter = document.getElementById('category-filter');
+    const levelFilter = document.getElementById('level-filter');
+    
+    // Función para aplicar los filtros
+    function applyFilters() {
+        const categoryValue = categoryFilter.value;
+        const levelValue = levelFilter.value;
+        
+        const courses = document.querySelectorAll('.course-card');
+        let visibleCourses = 0;
+        
+        courses.forEach(course => {
+            const courseCategory = course.querySelector('.course-category').textContent.toLowerCase();
+            const courseLevel = course.dataset.level ? course.dataset.level.toLowerCase() : 'todos';
+            
+            const categoryMatch = categoryValue === 'todos' || courseCategory === categoryValue.toLowerCase();
+            const levelMatch = levelValue === 'todos' || courseLevel === levelValue.toLowerCase();
+            
+            if (categoryMatch && levelMatch) {
+                course.style.display = 'block';
+                visibleCourses++;
+            } else {
+                course.style.display = 'none';
+            }
+        });
+        
+        // Mostrar mensaje si no hay resultados
+        const resultsContainer = document.querySelector('.courses-grid');
+        const noResultsMessage = document.getElementById('no-results-message');
+        
+        if (visibleCourses === 0) {
+            if (!noResultsMessage) {
+                const message = document.createElement('div');
+                message.id = 'no-results-message';
+                message.className = 'no-results';
+                message.textContent = 'No se encontraron cursos que coincidan con tus filtros.';
+                message.style.textAlign = 'center';
+                message.style.padding = '20px';
+                message.style.width = '100%';
+                message.style.gridColumn = '1 / -1';
+                
+                resultsContainer.appendChild(message);
+            }
+        } else if (noResultsMessage) {
+            noResultsMessage.remove();
+        }
+    }
+    
+    // Aplicar filtros cuando cambie la selección
+    if (categoryFilter) categoryFilter.addEventListener('change', applyFilters);
+    if (levelFilter) levelFilter.addEventListener('change', applyFilters);
+}
+
+// Sistema de progreso del curso (para páginas de curso individual)
+const progressBar = document.querySelector('.progress-bar');
+const progressPercentage = document.querySelector('.progress-percentage');
+
+// Función para actualizar el progreso
+function updateProgress(percent) {
+    if (progressBar && progressPercentage) {
+        progressBar.style.width = `${percent}%`;
+        progressPercentage.textContent = `${percent}%`;
+    }
+}
+
+// Marcar lecciones como completadas
+const lessonCheckboxes = document.querySelectorAll('.lesson-checkbox');
+if (lessonCheckboxes.length > 0) {
+    lessonCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            // Calcular el progreso basado en las lecciones completadas
+            const totalLessons = lessonCheckboxes.length;
+            const completedLessons = document.querySelectorAll('.lesson-checkbox:checked').length;
+            const progress = Math.round((completedLessons / totalLessons) * 100);
+            
+            // Actualizar la barra de progreso
+            updateProgress(progress);
+            
+            // En una aplicación real, aquí guardaríamos el progreso en una base de datos
+            // a través de una API
+            console.log(`Progreso actualizado: ${progress}%`);
+        });
+    });
+}
+
+// Validación de formularios
+const forms = document.querySelectorAll('form');
+forms.forEach(form => {
+    if (!form.classList.contains('newsletter-form') && !form.classList.contains('search-box')) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener todos los campos requeridos
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            // Validar cada campo
+            requiredFields.forEach(field => {
+                if (field.value.trim() === '') {
+                    isValid = false;
+                    field.style.borderColor = '#e74c3c';
+                    
+                    // Crear un mensaje de error si no existe
+                    if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('error-message')) {
+                        const errorMessage = document.createElement('span');
+                        errorMessage.className = 'error-message';
+                        errorMessage.textContent = 'Este campo es obligatorio';
+                        errorMessage.style.color = '#e74c3c';
+                        errorMessage.style.fontSize = '0.8rem';
+                        errorMessage.style.marginTop = '5px';
+                        errorMessage.style.display = 'block';
+                        
+                        field.parentNode.insertBefore(errorMessage, field.nextSibling);
+                    }
+                } else {
+                    field.style.borderColor = '';
+                    
+                    // Eliminar mensaje de error si existe
+                    if (field.nextElementSibling && field.nextElementSibling.classList.contains('error-message')) {
+                        field.parentNode.removeChild(field.nextElementSibling);
+                    }
+                }
+            });
+            
+            // Si el formulario es válido, mostrar mensaje de éxito
+            if (isValid) {
+                // Simular envío exitoso
+                const submitButton = form.querySelector('[type=\"submit\"]');
+                const originalText = submitButton.textContent;
+                
+                submitButton.disabled = true;
+                submitButton.textContent = 'Procesando...';
+                
+                setTimeout(() => {
+                    // En una aplicación real, aquí enviaríamos los datos a un servidor
+                    
+                    // Mostrar mensaje de éxito
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.textContent = '¡Operación completada con éxito!';
+                    successMessage.style.backgroundColor = '#2ecc71';
+                    successMessage.style.color = '#fff';
+                    successMessage.style.padding = '15px';
+                    successMessage.style.borderRadius = '5px';
+                    successMessage.style.marginTop = '20px';
+                    
+                    form.appendChild(successMessage);
+                    
+                    // Restablecer formulario
+                    form.reset();
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                    
+                    // Eliminar mensaje después de 3 segundos
+                    setTimeout(() => {
+                        form.removeChild(successMessage);
+                    }, 3000);
+                }, 1500);
+            }
+        });
+    }
+});`
+}
