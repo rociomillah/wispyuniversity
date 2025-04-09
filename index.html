@@ -480,31 +480,38 @@
     <script>
         // Función para manejar la navegación
         function navegarA(pagina) {
-          // Verificar si estamos en la raíz o en una subcarpeta
-          const estaEnSubcarpeta = window.location.pathname.includes('/pages/');
-          
-          // Construir la ruta adecuada
-          let ruta = '';
-          
-          if (pagina === 'inicio') {
-            ruta = estaEnSubcarpeta ? '../index.html' : 'index.html';
-          } else if (pagina === 'capacitaciones') {
-            ruta = estaEnSubcarpeta ? 'capacitaciones.html' : 'pages/capacitaciones.html';
-          } else if (pagina === 'nosotros') {
-            ruta = estaEnSubcarpeta ? 'nosotros.html' : 'pages/nosotros.html';
-          } else if (pagina === 'certificaciones') {
-            ruta = estaEnSubcarpeta ? 'certificaciones.html' : 'pages/certificaciones.html';
-          } else if (pagina === 'contacto') {
-            ruta = estaEnSubcarpeta ? 'contacto.html' : 'pages/contacto.html';
-          } else if (pagina === 'iniciarsesion') {
-            ruta = estaEnSubcarpeta ? 'iniciarsesion.html' : 'pages/iniciarsesion.html';
-          } else if (pagina === 'inscribete') {
-            ruta = estaEnSubcarpeta ? 'inscribete.html' : 'pages/inscribete.html';
-          }
-          
-          // Navegar a la ruta
-          window.location.href = ruta;
-        }
+  // Simplificar la lógica - no necesitamos verificar subdirectorios
+  let ruta = '';
+  
+  if (pagina === 'inicio') {
+    ruta = 'index.html';
+  } else if (pagina === 'capacitaciones') {
+    ruta = 'capacitaciones.html';
+  } else if (pagina === 'nosotros') {
+    ruta = 'nosotros.html';
+  } else if (pagina === 'certificaciones') {
+    ruta = 'certificaciones.html';
+  } else if (pagina === 'contacto') {
+    ruta = 'contacto.html';
+  } else if (pagina === 'iniciarsesion') {
+    ruta = 'iniciarsesion.html';
+  } else if (pagina === 'inscribete') {
+    ruta = 'inscribete.html';
+  } else if (pagina === 'modulo1') {
+    ruta = 'Modulo1.html';
+  } else if (pagina === 'modulo2') {
+    ruta = 'Modulo2.html';
+  } else if (pagina === 'modulo3') {
+    ruta = 'Modulo3.html';
+  } else if (pagina === 'modulo4') {
+    ruta = 'Modulo4.html';
+  } else if (pagina === 'modulo5') {
+    ruta = 'Modulo5.html';
+  }
+  
+  // Navegar a la ruta
+  window.location.href = ruta;
+}
       </script>
       
       <!-- Crear partículas animadas para el hero section -->
